@@ -14,8 +14,8 @@ module edge_indent() {
     indent_width = (sqrt(2) / 2) * edge_length - bevel;
     indent_height = 2 * height * holder_height_ratio + 1;
     rotate([0, 0, 45]) {
-        translate([0, 0, -1]) {
-            cube([indent_width, indent_width, indent_height], true);
+        translate([-indent_width / 2, -indent_width / 2, -1]) {
+            cube([indent_width, indent_width, indent_height / 2]);
         }
     }
 }
@@ -32,11 +32,11 @@ module screw_hole() {
 rotate([0, 0, 0]) {
     edge_offset = edge_length / 2;
     difference() {
-        cube([edge_length, edge_length, height], false);
-        translate([0, edge_length / 2, 0]) edge_indent();
-        translate([edge_length / 2, 0, 0]) edge_indent();
-        translate([edge_length, edge_length / 2, 0]) edge_indent();
-        translate([edge_length / 2, edge_length, 0]) edge_indent();
-        translate([edge_length / 2, edge_length / 2, 0]) screw_hole();
+        cube([edge_length, edge_length, height], true);
+        rotate([0, 0, 0]) translate([0, edge_length / 2, - height / 2]) edge_indent();
+        rotate([0, 0, 90]) translate([0, edge_length / 2, - height / 2]) edge_indent();
+        rotate([0, 0, 180]) translate([0, edge_length / 2, - height / 2]) edge_indent();
+        rotate([0, 0, 270]) translate([0, edge_length / 2, - height / 2]) edge_indent();
+        translate([0, 0, -height / 2]) screw_hole();
     }
 }
