@@ -1,14 +1,15 @@
 // Units are in mm
 $fn=20;
 
-height = 7.5;
-bevel = 7.5;
-holder_height_ratio = 2/3;
+edge_length = 35;
+height = 14;
+bevel = 10;
+
+holder_height_ratio = .8;
 screw_hole_width = 3.34;
 screw_head_width = 8;
-screw_height_ratio = .7;
+screw_height_ratio = .85;
 
-edge_length = 40;
 center_width = sqrt(pow(edge_length / 2, 2) + pow(bevel, 2));
 
 module corner_indent() {
@@ -42,12 +43,14 @@ module screw_hole() {
     }
 }
 
-rotate([0, 180, 45]) {
-    edge_offset = edge_length / 2;
-    difference() {
-        cube([edge_length, edge_length, height], true);
-        rotate([0, 0, 0]) translate([0, 0, - height / 2]) edge_indent();
-        rotate([0, 0, 180]) translate([0, 0, - height / 2]) edge_indent();
-        translate([0, 0, -height / 2]) screw_hole();
+translate([0, 0, height / 2]) {
+    rotate([0, 180, 0]) {
+        edge_offset = edge_length / 2;
+        difference() {
+            cube([edge_length, edge_length, height], true);
+            rotate([0, 0, 0]) translate([0, 0, - height / 2]) edge_indent();
+            rotate([0, 0, 180]) translate([0, 0, - height / 2]) edge_indent();
+            translate([0, 0, -height / 2]) screw_hole();
+        }
     }
 }
