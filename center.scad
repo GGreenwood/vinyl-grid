@@ -1,16 +1,33 @@
 // Units are in mm
 $fn=20;
 
+/* [Global] */
+
+// How long in mm the mount's sides ar = 35;
 edge_length = 35;
+
+// How far in mm the mount will stick off the wall
 height = 14;
+
+// Thickness of the bevel in mm between records.
 bevel = 10;
 
-holder_height_ratio = .8;
-screw_hole_width = 3.34;
+// What proportion of the height is left for the record to sit in. 80% on the default height is enough for double-thick records
+holder_height_ratio = .8; // [0:.02:1]
+
+// Width in mm or the screw's body. Leave a little wiggle room here for the threads to turn freely.
+screw_hole_width = 3.75;
+
+// Width in mm of the screw's head
 screw_head_width = 8;
-screw_height_ratio = .85;
+
+// How high on the model the screw head should sit
+screw_height_ratio = .85; // [0:.02:1]
+
+/* [Hidden] */
 
 center_width = sqrt(pow(edge_length / 2, 2) + pow(bevel, 2));
+
 
 module corner_indent() {
     indent_width = (sqrt(2) / 2) * edge_length - bevel;
